@@ -661,3 +661,32 @@ function safe_html($html){
     $html = strip_tags($html,'<'.implode('><', array_keys($elements)).'>');
     return $html;
 }
+
+/**
+ * 如果直接使用base64_encode和base64_decode方法的话，生成的字符串可能不适用URL地址
+ * URL安全的字符串编码
+ * @param $string
+ * @return mixed|string
+ */
+function urlsafe_b64encode($string)
+{
+    $data = base64_encode($string);
+    $data = str_replace(array('+', '/', '='), array('-', '_', ''), $data);
+    return $data;
+}
+
+/**
+ * 如果直接使用base64_encode和base64_decode方法的话，生成的字符串可能不适用URL地址
+ * URL安全的字符串解码
+ * @param $string
+ * @return bool|string
+ */
+function urlsafe_b64decode($string)
+{
+    $data = str_replace(array('-', '_'), array('+', '/'), $string);
+    $mod4 = strlen($data) % 4;
+    if ($mod4) {
+        $data .= substr('====', $mod4);
+    }
+    return base64_decode($data);
+}
