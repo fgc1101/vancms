@@ -160,4 +160,9 @@ return [
         ]
     ],
     'pageSize'=>15,
+
+    'weixin'=>[
+        'appid' => 'wx9b9a2cc8fc18fc51',
+        'appsecret' => '193220b21da9d894d464a52e73c4dc9d'
+    ]
 ];

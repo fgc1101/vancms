@@ -65,7 +65,7 @@ CREATE TABLE `auth_rule` (
   `zt` int(1) DEFAULT NULL,
   `menustatus` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=282 DEFAULT CHARSET=utf8 COMMENT='权限节点';
+) ENGINE=MyISAM AUTO_INCREMENT=283 DEFAULT CHARSET=utf8 COMMENT='权限节点';
 
 -- -----------------------------
 -- Records of `auth_rule`
@@ -92,6 +92,7 @@ INSERT INTO `auth_rule` VALUES ('151', 'Auth/groupRunaccess', '操作-权存', '
 INSERT INTO `auth_rule` VALUES ('181', 'Auth/groupState', '操作-状态', '1', '1', '0', '', '', '17', '50', '1461834340', '1', '0');
 INSERT INTO `auth_rule` VALUES ('280', 'Data', '数据库管理', '1', '1', '0', 'icon-database', '', '0', '100', '1585916507', '1', '1');
 INSERT INTO `auth_rule` VALUES ('281', 'Data/index', '数据库备份', '1', '1', '1', '', '', '280', '50', '1585916576', '1', '1');
+INSERT INTO `auth_rule` VALUES ('282', 'Data/filelist', '数据库还原', '1', '1', '1', '', '', '280', '50', '1585919611', '1', '1');
 
 -- -----------------------------
 -- Table structure for `config`
