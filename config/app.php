@@ -162,7 +162,9 @@ return [
     'pageSize'=>15,
 
     'weixin'=>[
-        'appid' => 'wx9b9a2cc8fc18fc51',
-        'appsecret' => '193220b21da9d894d464a52e73c4dc9d'
+        'appid' => 'wx1b52115dfa323af9',
+        'appsecret' => '9e35a003b0e77ed0c3aec6a49a4317f7',
+        'token' => 'fgc2020',
+        'remote' => 'http://cms.fgc1024.cn'
     ]
 ];

@@ -5,6 +5,6 @@ use app\wechat\controller\Common;
 class Index extends Common{
 
     public function index(){
-        echo "index";
+        echo "微信公众号首页";
     }
 }

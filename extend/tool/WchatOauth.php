@@ -9,6 +9,8 @@ class WchatOauth
     public $author_appid;
 
     public $token;
+
+    public $config;
     /**
      * 构造函数
      *
@@ -17,6 +19,7 @@ class WchatOauth
     public function __construct($appid = '')
     {
         $this->author_appid = 'instanceid_0';
+        $this->config = config('weixin');
     }
     /**
      * ***********************************************************************基础信息*************************************************
@@ -39,7 +42,7 @@ class WchatOauth
     private function single_get_access_token()
     {
         $config = config('weixin');
-        var_dump($config);die;
+        //var_dump($config);die;
         $url ='https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$config['appid'].'&secret='.$config['appsecret'];
         $a = httpRequest($url,'GET');
         $strjson = json_decode($a);
@@ -391,8 +394,8 @@ class WchatOauth
      */
     public function auth($code)
     {
-        $appid = 'wx9b9a2cc8fc18fc51';
-        $secret = '193220b21da9d894d464a52e73c4dc9d';
+        $appid = $this->config['appid'];
+        $secret = $this->config['appsecret'];
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$appid."&secret=".$secret."&code=".$code."&grant_type=authorization_code";
         $result = $this->get_url_return($url);
         return $result;
