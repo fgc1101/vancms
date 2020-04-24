@@ -11,4 +11,7 @@
 
 return [
     '/'=>'home/index/index',
+
+
+    '/oauth_callback' => 'weixin/wauth/oauth_callback',
 ];
