@@ -3,7 +3,6 @@ namespace app\home\controller;
 use think\Controller;
 use think\Db;
 use think\facade\Env;
-use tool;
 
 class Index extends Controller {
 
@@ -11,6 +10,11 @@ class Index extends Controller {
         echo '首页';
     }
 
+    /**
+     * 生成二维码功能
+     * @param string $url
+     * @return string
+     */
     public function scerweima($url='http://www.baidu.com'){
         include_once '../extend/tool/phpqrcode.php';
 
@@ -35,5 +39,18 @@ class Index extends Controller {
         imagedestroy($QR);
         $url = '/uploads/qrcode/'.$time.'.png';
         return '<img src='.$url.' alt="使用微信扫描支付">';
+    }
+
+    /**
+     * pdf装成png图片
+     */
+    public function pdftopng(){
+
+        $pdf = new \Spatie\PdfToImage\Pdf('../public/datas/jianli.pdf');
+        foreach (range(1, $pdf->getNumberOfPages()) as $pageNumber) {
+            $pdf->setPage($pageNumber)
+                ->saveImage('../public/datas/png/page'.$pageNumber.'.jpg');
+        }
+
     }
 }
