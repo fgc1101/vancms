@@ -1,10 +1,8 @@
 <?php
 namespace app\weixin\controller;
 
-use EasyWeChat\Factory;
 use think\Controller;
 use think\facade\Session;
-use think\Request;
 
 class Index extends Controller {
 
@@ -12,7 +10,6 @@ class Index extends Controller {
     protected $middleware = ['auth'];
 
     public function index(){
-        echo "weixin shouye";
         var_dump(Session::get('wechat_user'));
     }
 
