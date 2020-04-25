@@ -13,6 +13,10 @@ class Wauth extends Controller{
         $config = config('wechat.official_account.default');
         $app = Factory::officialAccount($config);
 
+        $app->server->push(function ($message) {
+            return "您好！你正在使用范国超的微信测试号";
+        });
+
         $response = $app->server->serve();
 
         // 将响应输出
