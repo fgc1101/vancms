@@ -1,0 +1,30 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <table id="datatable" lay-filter="datatable"></table>
+</div>
+{include file="common/foot"/}
+<script type="text/javascript">
+    layui.config({
+        base: '/static/admin/js/'
+    }).use(['table', 'form', 'layer', 'jquery', 'utils', 'element', 'laytpl', 'flow'], function () {
+        var table = layui.table, form = layui.form, layer = layui.layer, $ = layui.jquery,
+            utils = layui.utils, element = layui.element, laytpl = layui.laytpl, flow = layui.flow;
+        var datatable = table.render({
+            elem: '#datatable',
+            limit: "{$page_size}",
+            url: "{:url('wechat/wx_user_index')}?t=" + new Date().getTime(),
+            page: true,
+            cols: [[
+                {field: 'id', title: '序号', align: 'center', width: 80},
+                {field: 'nickname', title: '昵称', align: 'center', width: 150},
+                {
+                    field: 'headimgurl', title: '头像', align: 'center', width: 80, templet: function (v) {
+                        return '<img src="'+v.headimgurl+'" height="40px" width="40px">'
+                    }
+                }
+            ]]
+        });
+
+    });
+</script>
+

@@ -7,8 +7,11 @@ class Index extends Common
     public function initialize(){
         parent::initialize();
     }
+
+    /**导航
+     * @return mixed
+     */
     public function index(){
-        //导航
         // 获取缓存数据
         $authRule = cache('authRule');
         if(!$authRule){
@@ -45,6 +48,10 @@ class Index extends Common
         $this->assign('menus',json_encode($menus,true));
         return $this->fetch();
     }
+
+    /**
+     * @return mixed 后台主页
+     */
     public function main(){
         $version = Db::query('SELECT VERSION() AS ver');
         $config  = [

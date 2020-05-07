@@ -18,7 +18,7 @@ return [
         /*
          * 使用 ThinkPHP 的缓存系统
          */
-        'use_tp_cache'  => true,
+        'use_tp_cache'  => false,
         /*
          * 日志配置
          *
@@ -36,9 +36,9 @@ return [
     'official_account' => [
         'default' => [
             // AppID
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx1b52115dfa323af9'),
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx3ca84bf657ccb4fa'),
             // AppSecret
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '9e35a003b0e77ed0c3aec6a49a4317f7'),
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '09fd29b66a9eb62243fe9bfc211d3d7e'),
             // Token
             'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'fgc2020'),
             // EncodingAESKey

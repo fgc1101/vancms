@@ -3,11 +3,12 @@ namespace app\home\controller;
 use think\Controller;
 use think\Db;
 use think\facade\Env;
+use think\facade\Session;
 
 class Index extends Controller {
 
     public function index(){
-        echo '首页';
+        //Session::clear();
     }
 
     /**
