@@ -268,6 +268,47 @@ function str_cut($sourcestr,$cutlength,$suffix='...')
     }
     return $returnstr;
 }
+
+
+/***
+ * 创建多级目录
+ * @param $path
+ * @return bool
+ */
+function mkdirs_2($path){
+    if(!is_dir($path)){
+        $this->mkdirs_2(dirname($path));
+        if(!mkdir($path, 0777)){
+            return false;
+        }
+    }
+    return true;
+}
+
+function deldir($dir) {
+    //先删除目录下的文件：
+    $dh=opendir($dir);
+    while ($file=readdir($dh)) {
+        if($file!="." && $file!="..") {
+            $fullpath=$dir."/".$file;
+            if(!is_dir($fullpath)) {
+                unlink($fullpath);
+            } else {
+                $this->deldir($fullpath);
+            }
+        }
+    }
+
+    closedir($dh);
+    //删除当前文件夹：
+    if(rmdir($dir)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 //删除目录及文件
 function dir_delete($dir) {
     $dir = dir_path($dir);
@@ -278,6 +319,8 @@ function dir_delete($dir) {
     }
     return @rmdir($dir);
 }
+
+
 /**
  * CURL请求
  * @param $url 请求url地址
@@ -557,6 +600,8 @@ function send_email($to,$subject='',$content=''){
     $mail->msgHTML($content);
     return $mail->send();
 }
+
+
 function safe_html($html){
     $elements = [
         'html'      =>  [],
@@ -689,4 +734,27 @@ function urlsafe_b64decode($string)
         $data .= substr('====', $mod4);
     }
     return base64_decode($data);
+}
+
+
+/**
+ * @param $url string 要下载的文件的路径
+ * @param $rename string 下载完成后的命名
+ * @param $ext string 下载完成后的扩展名
+ * @param $file_path string 下载完成后的路径
+ * @return string
+ */
+function download_pdf($url,$rename,$ext,$file_path){
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+    $rawdata=curl_exec ($ch);
+    curl_close ($ch);
+    $fp = fopen($file_path.iconv('UTF-8', 'GBK', $rename).".".$ext,'w');
+    fwrite($fp, $rawdata);
+    fclose($fp);
+
+    return $_SERVER['DOCUMENT_ROOT'].$file_path.$rename.".".$ext;
 }
