@@ -1,0 +1,87 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>广告列表</legend>
+    </fieldset>
+    <fieldset class="layui-elem-field layui-field-box">
+        <form lay-filter="searchForm" id="searchForm">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="输入广告位名称关键字，如果为空查询全部" class="layui-input layui-btn-sm" style="height: 32px;">
+                </div>
+                <button type="submit" lay-submit lay-filter="searchForm" class="layui-btn layui-btn-sm layui-btn-warm">
+                    <i class="fa fa-search"></i>搜索
+                </button>
+                <button class="layui-btn layui-btn-sm" id="addBtn">
+                    <i class="fa fa-plus"></i>新增广告位
+                </button>
+            </div>
+        </form>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+    </fieldset>
+
+</div>
+{include file="common/foot"/}
+<script>
+    layui.use(['table','form'], function() {
+        var table = layui.table,form = layui.form,$ = layui.jquery;
+        var tableIn = table.render({
+            elem: '#list',
+            url: '{:url("ad/index")}?t='+ new Date().getTime(),
+            method:'post',
+            limit: "{$page_size}",
+            page: true,
+            title:'广告列表',
+            cols: [[
+                {field: 'id', title: '序号', align: 'center', width: 80},
+                {field: 'name', title: '广告位名称', align: 'center', width: 120},
+                {
+                    field: 'img', title: '广告图片', align: 'center', width: 140, templet: function (v) {
+                        return '<img src="/uploads/' + v.img + '">';
+                    }
+                },
+                {field: 'location', title: '位置', align: 'center', width: 100},
+                {field: 'sort', title: '排序', align: 'center', width: 80},
+                {
+                    field: 'create_time', title: '创建时间', align: 'center', width: 170,
+                    templet: '<span>{{ d.create_time }}</span>'
+                },
+                {
+                    field: 'update_time', title: '修改时间', align: 'center', width: 170,
+                    templet: '<span>{{ d.update_time }}</span>'
+                },
+                {
+                    field: 'status', title: '状态', align: 'center', width: 100, templet: function (v) {
+                        if (v.status == 1) {
+                            return '<a class="layui-btn layui-btn-xs changeStatus" lay-event="changeStatus">已开启</a>';
+                        } else {
+                            return '<a class="layui-btn layui-btn-danger layui-btn-xs changeStatus" lay-event="changeStatus">已禁用</a>';
+                        }
+                    }
+                },
+                {title: '操作', align: 'center', toolbar: '#toobar', width: 120}
+            ]]
+        });
+
+        // 搜索按钮 表格重新载入
+        form.on('submit(searchForm)', function (data) {
+            var keyword = encodeURI($('input[name=keyword]').val());
+            tableIn.reload({where: {keyword: keyword, page: 1}});
+            return false;
+        });
+
+        //添加广告按钮的点击事件
+        $("#addBtn").click(function(){
+            layer.open({
+                type: 2,
+                title: '新增广告位',
+                area: ['650px', '500px'],
+                scrollbar: false,
+                anim: 2,
+                shadeClose: true,
+                content: "{:url('ad/add')}?t=" + new Date().getTime()
+            });
+            return false;
+        })
+    });
+</script>
