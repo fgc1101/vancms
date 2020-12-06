@@ -22,7 +22,7 @@
         "phpmailer/phpmailer": "^6.0",
         "tp5er/tp5-databackup": "^1.0",
         "overtrue/wechat": "~4.0",
-        "spatie/pdf-to-image": "^2.0"
+        "qiniu/php-sdk": "^7.3"
     },
     "autoload": {
         "psr-4": {
