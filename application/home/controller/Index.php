@@ -9,6 +9,7 @@ class Index extends Controller {
 
     public function index(){
         //Session::clear();
+        echo "首页";
     }
 
     /**
