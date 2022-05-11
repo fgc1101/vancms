@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => 'localhost',
     // 数据库名
-    'database'        => 'vancms',
+    'database'        => 'van',
     // 用户名
-    'username'        => 'vancms',
+    'username'        => 'root',
     // 密码
-    'password'        => 'vancms123456',
+    'password'        => 'root',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
